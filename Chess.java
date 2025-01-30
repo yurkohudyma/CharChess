@@ -172,8 +172,8 @@ class Horse extends Figure {
     void move(int x, int y) {
         if (!checkBoundaries(x, y)) {
             out.println("move " + x + ":" + y + " leads outside the chessboard");
+        } else if (checkFigureAttack(getX(), getY(), getX() + x, getY() + y, horse.figureChar)) {
         } else {
-            checkFigureAttack(getX(), getY(), getX() + x, getY() + y, horse.figureChar);
             chessboard[getX()][getY()] = dot;
             registerMove(figureChar, getX(), getY(), getX() + x, getY() + y);
             setX(getX() + x);
@@ -276,8 +276,8 @@ class Bishop extends Figure {
         } else if (!checkBoundaries(x, y)) {
             out.println(figureChar + " move " + x + ":" + y + " leads outside the chessboard");
         } else if (!checkTransitClear(x, y)) {
+        } else if (checkFigureAttack(getX(), getY(), x, y, figureChar)) {
         } else {
-            checkFigureAttack(getX(), getY(), x, y, figureChar);
             chessboard[getX()][getY()] = dot;
             registerMove(figureChar, getX(), getY(), x, y);
             setX(x);
@@ -379,8 +379,8 @@ class Rook extends Figure {
         } else if (!checkTransitClear(x, y)) {
             out.println("There's a figure in the way of " + figureChar + " move at " + x + ":" + y);
             printDelimiter();
+        } else if (checkFigureAttack(getX(), getY(), x, y, figureChar)) {
         } else {
-            checkFigureAttack(getX(), getY(), x, y, figureChar);
             chessboard[getX()][getY()] = dot;
             chessboard[x][y] = figureChar;
             registerMove(figureChar, getX(), getY(), x, y);
@@ -583,7 +583,6 @@ class kingBlack extends Figure {
             printDelimiter();
             throw new IllegalStateException();
         } else if (chessboard[x][y] != dot) {
-            //out.println("target square " + x + " : " + y + " is taken by " + chessboard[x][y]);
             printDelimiter();
             checkFigureAttack(getX(), getY(), x, y, figureChar);
         } else if (checkFigure != dot) {
