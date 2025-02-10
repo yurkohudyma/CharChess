@@ -11,7 +11,7 @@ public class Chess {
     static int defeatedIndex = -1, chessboardSize = 8, innerListMovesCounter, lastCheckFigureCoordX = -1, lastCheckFigureCoordY = -1;
     static char[][] chessboard = new char[chessboardSize][chessboardSize];
     static char dot = '\u00b7', lastCheckFigureChar;
-    static List<Character> defeatedFigures = new ArrayList<>();
+    static List<Character> defeatedWhiteFigures = new ArrayList<>(), defeatedBlackFigures = new ArrayList<>();
     static List<MovesRegister> movesRegister = new ArrayList<>();
     static List<Figure> initialFiguresLayout = new ArrayList<>();
     static Horse horseBlackLeft, horseBlackRight;
@@ -35,89 +35,93 @@ public class Chess {
         horseBlackLeft.moveDownAndLeft();
         pawnBlack2.move(2);
         pawnWhite5.move();
-        bishopWhiteRight.move(3, 1, bishopWhiteRight);
+        bishopWhiteRight.move(3, 1);
         pawnBlack3.move();
-        pawnBlack3.move(3, 1, pawnBlack3);
-        bishopBlackLeft.move(1, 1, bishopBlackLeft);
-        queenBlack.move(1, 2, queenBlack);
+        pawnBlack3.move(3, 1);
+        bishopBlackLeft.move(1, 1);
+        queenBlack.move(1, 2);
         kingBlack.castle(kingBlack, false);
         horseBlackLeft.moveDownAndRight();
         horseWhiteRight.moveUpAndLeft();
-        queenBlack.move(6, 2, queenBlack);
+        queenBlack.move(6, 2);
         horseWhiteRight.moveUpAndLeft();
         kingWhite.castle(kingWhite, true);
-        queenBlack.move(7, 3, queenBlack);
+        queenBlack.move(7, 3);
         horseWhiteRight.moveRightAndUp();
-        rookWhiteRight.move(7, 3, rookWhiteRight);
-        rookBlackLeft.move(7, 2, rookBlackLeft);
-        rookWhiteRight.move(7, 2, rookWhiteRight);
+        rookWhiteRight.move(7, 3);
+        rookBlackLeft.move(7, 2);
+        rookWhiteRight.move(7, 2);
         horseWhiteLeft.moveUpAndLeft();
         pawnBlack5.move(2);
         horseWhiteRight.moveLeftAndDown();
         horseBlackLeft.moveRightAndDown();
-        bishopBlackRight.move(5, 0, bishopBlackRight);
+        bishopBlackRight.move(5, 0);
         horseBlackLeft.moveDownAndLeft();
-        rookWhiteLeft.move(7, 2, rookWhiteLeft);
-        pawnWhite2.move(5, 0, pawnWhite2);
+        rookWhiteLeft.move(7, 2);
+        pawnWhite2.move(5, 0);
         horseBlackRight.moveDownAndLeft();
-        rookWhiteLeft.move(3, 2, rookWhiteLeft);
+        rookWhiteLeft.move(3, 2);
         horseBlackRight.moveRightAndDown();
-        rookWhiteLeft.move(3, 1, rookWhiteLeft);
+        rookWhiteLeft.move(3, 1);
         pawnBlack1.move();
-        rookWhiteLeft.move(3, 4, rookWhiteLeft);
+        rookWhiteLeft.move(3, 4);
         horseBlackRight.moveLeftAndDown();
         horseWhiteRight.moveLeftAndDown();
-        bishopBlackLeft.move(6, 6, bishopBlackLeft);
-        rookWhiteLeft.move(3, 6, rookWhiteLeft);
-        kingBlack.move(1, 2, kingBlack);
-        rookWhiteLeft.move(4, 6, rookWhiteLeft);
-        kingBlack.move(2, 3, kingBlack);
-        rookWhiteLeft.move(4, 5, rookWhiteLeft);
-        kingWhite.move(6, 6, kingWhite);
-        kingBlack.move(3, 4, kingBlack);
+        bishopBlackLeft.move(6, 6);
+        rookWhiteLeft.move(3, 6);
+        kingBlack.move(1, 2);
+        rookWhiteLeft.move(4, 6);
+        kingBlack.move(2, 3);
+        rookWhiteLeft.move(4, 5);
+        kingWhite.move(6, 6);
+        kingBlack.move(3, 4);
         pawnWhite4.move(2);
-        kingBlack.move(3, 3, kingBlack);
-        rookWhiteLeft.move(3, 5, rookWhiteLeft);
-        kingBlack.move(2, 4, kingBlack);
-        rookWhiteLeft.move(3, 4, rookWhiteLeft);
-        kingBlack.move(2, 3, kingBlack);
+        kingBlack.move(3, 3);
+        rookWhiteLeft.move(3, 5);
+        kingBlack.move(2, 4);
+        rookWhiteLeft.move(3, 4);
+        kingBlack.move(2, 3);
         pawnBlack8.move();
         pawnWhite6.move(2);
-        rookWhiteLeft.move(3, 0, rookWhiteLeft);
-        kingBlack.move(2, 2, kingBlack);
-        rookWhiteLeft.move(2, 0, rookWhiteLeft);
-        kingBlack.move(1, 1, kingBlack);
-        rookWhiteLeft.move(2, 6, rookWhiteLeft);
+        rookWhiteLeft.move(3, 0);
+        kingBlack.move(2, 2);
+        rookWhiteLeft.move(2, 0);
+        kingBlack.move(1, 1);
+        rookWhiteLeft.move(2, 6);
         pawnBlack8.move();
-        rookWhiteLeft.move(1, 6, rookWhiteLeft);
-        kingBlack.move(0, 2, kingBlack);
-        rookWhiteLeft.move(1, 7, rookWhiteLeft);
-        kingBlack.move(1, 2, kingBlack);
-        rookWhiteLeft.move(3, 7, rookWhiteLeft);
-        kingBlack.move(2, 2, kingBlack);
+        rookWhiteLeft.move(1, 6);
+        kingBlack.move(0, 2);
+        rookWhiteLeft.move(1, 7);
+        kingBlack.move(1, 2);
+        rookWhiteLeft.move(1, 6);
+        kingBlack.move(2, 2);
         pawnWhite5.move();
-        kingBlack.move(3, 1, kingBlack);
+        kingBlack.move(3, 1);
         pawnWhite4.move();
-        kingBlack.move(4, 0, kingBlack);
+        kingBlack.move(4, 0);
         pawnWhite4.move();
-        rookWhiteLeft.move(5, 7, rookWhiteLeft);
-        kingBlack.move(3, 0, kingBlack);
+        rookWhiteLeft.move(5, 6);
+        kingBlack.move(3, 0);
         pawnWhite2.move();
-        kingBlack.move(4, 0, kingBlack);
+        kingBlack.move(4, 0);
         pawnWhite6.move();
-        kingBlack.move(4, 1, kingBlack);
+        kingBlack.move(4, 1);
         pawnWhite6.move();
-        kingBlack.move(3, 2, kingBlack);
+        kingBlack.move(3, 2);
         pawnWhite6.move();
-        kingBlack.move(2, 3, kingBlack);
+        kingBlack.move(2, 3);
         pawnWhite6.move();
-        kingBlack.move(1, 2, kingBlack);
-        rookWhiteLeft.move(5, 2, rookWhiteLeft);
-        kingBlack.move(1, 1, kingBlack);
-        queenNew.move(0, 2, queenNew);
-        kingBlack.move(0, 1, kingBlack);
-
-
+        kingBlack.move(1, 2);
+        rookWhiteLeft.move(5, 2);
+        kingBlack.move(1, 1);
+        queenNew.move(0, 2);
+        kingBlack.move(1, 0);
+        rookWhiteLeft.move(5, 1);
+        pawnBlack4.move();
+        queenNew.move(1, 1);
+        //out.println(kingBlack.isStalemate(kingBlack.getX(), kingBlack.getY()));
+        //out.println(kingBlack.isSquareChecked(kingBlack.getX(), kingBlack.getY()));
+        kingBlack.move(2, 0);
     }
 
     static void printDelimiter() {
@@ -131,16 +135,22 @@ public class Chess {
         printMovesRegister();
         out.println();
         printDelimiter();
-        out.println(!defeatedFigures.isEmpty() ? "Defeated: " + defeatedFigures : "");
+        out.println(!defeatedWhiteFigures.isEmpty() ? "Whites: " + defeatedWhiteFigures : "");
+        out.println(!defeatedBlackFigures.isEmpty() ? "Blacks: " + defeatedBlackFigures : "");
     }
 
-    private static void printMovesRegister() {
+    static void printMovesRegister() {
         if (!movesRegister.isEmpty()) {
             out.println("---- MovesRegister ----");
             AtomicInteger movesCounter = new AtomicInteger();
-            movesRegister.forEach(e -> out.println(movesCounter.incrementAndGet() + ". "
-                    + e.getFigure().getFigureChar() + " (" + e.getStartX() + " : " + e.getStartY()
-                    + ") -> (" + e.getTargetX() + " : " + e.getTargetY() + ") " + e.getMoveSpecialty() + " : " + e.getFigure().getClass().getName()));
+            movesRegister.forEach(e -> out.println(
+                    movesCounter.incrementAndGet() + ". "
+                            + e.getFigure().getFigureChar()
+                            + " (" + e.getStartX() + " : "
+                            + e.getStartY() + ") -> (" +
+                            e.getTargetX() + " : " +
+                            e.getTargetY() + ") "
+                            + e.getMoveSpecialty()));
         }
         if (movesRegister.size() >= 20) {
             printBoard();
@@ -208,57 +218,50 @@ public class Chess {
     }
 
     private static void fetchInitialChessboardLayout() {
-        horseBlackLeft = new Horse(0, 1, horseBlackLeft);
-        horseBlackRight = new Horse(0, 6, horseBlackRight);
-        horseWhiteLeft = new Horse.WhiteHorse(7, 1, horseWhiteLeft);
-        horseWhiteRight = new Horse.WhiteHorse(7, 6, horseWhiteRight);
-        bishopBlackLeft = new Bishop(0, 2, bishopBlackLeft);
-        bishopBlackRight = new Bishop(0, 5, bishopBlackRight);
-        bishopWhiteLeft = new Bishop.WhiteBishop(7, 2, bishopWhiteLeft);
-        bishopWhiteRight = new Bishop.WhiteBishop(7, 5, bishopWhiteRight);
-        rookBlackLeft = new Rook(0, 0, rookBlackLeft);
-        rookBlackRight = new Rook(0, 7, rookBlackRight);
-        rookWhiteLeft = new Rook.WhiteRook(7, 0, rookWhiteLeft);
-        rookWhiteRight = new Rook.WhiteRook(7, 7, rookWhiteRight);
-        pawnBlack1 = new Pawn(1, 0, pawnBlack1);
-        pawnBlack2 = new Pawn(1, 1, pawnBlack2);
-        pawnBlack3 = new Pawn(1, 2, pawnBlack3);
-        pawnBlack4 = new Pawn(1, 3, pawnBlack4);
-        pawnBlack5 = new Pawn(1, 4, pawnBlack5);
-        pawnBlack6 = new Pawn(1, 5, pawnBlack6);
-        pawnBlack7 = new Pawn(1, 6, pawnBlack7);
-        pawnBlack8 = new Pawn(1, 7, pawnBlack8);
-        pawnWhite1 = new Pawn.WhitePawn(6, 0, pawnWhite1);
-        pawnWhite2 = new Pawn.WhitePawn(6, 1, pawnWhite2);
-        pawnWhite3 = new Pawn.WhitePawn(6, 2, pawnWhite3);
-        pawnWhite4 = new Pawn.WhitePawn(6, 3, pawnWhite4);
-        pawnWhite5 = new Pawn.WhitePawn(6, 4, pawnWhite5);
-        pawnWhite6 = new Pawn.WhitePawn(6, 5, pawnWhite6);
-        pawnWhite7 = new Pawn.WhitePawn(6, 6, pawnWhite7);
-        pawnWhite8 = new Pawn.WhitePawn(6, 7, pawnWhite8);
-        queenBlack = new Queen(0, 3, queenBlack);
-        queenWhite = new Queen.WhiteQueen(7, 3, queenWhite);
-        kingBlack = new King(0, 4, kingBlack);
-        kingWhite = new King.WhiteKing(7, 4, kingWhite);
-        initialFiguresLayout.addAll(List.of(
-                horseBlackLeft, horseBlackRight, horseWhiteLeft, horseWhiteRight,
-                bishopBlackLeft, bishopBlackRight, bishopWhiteLeft, bishopWhiteRight,
-                rookBlackLeft, rookBlackRight, rookWhiteLeft, rookWhiteRight,
-                pawnBlack1, pawnBlack2, pawnBlack3, pawnBlack4, pawnBlack5, pawnBlack6,
-                pawnBlack7, pawnBlack7, pawnBlack8, pawnWhite1, pawnWhite2, pawnWhite3,
-                pawnWhite4, pawnWhite5, pawnWhite6, pawnWhite7, pawnWhite8,
-                queenBlack, queenWhite, kingBlack, kingWhite));
+        horseBlackLeft = new Horse(0, 1);
+        horseBlackRight = new Horse(0, 6);
+        horseWhiteLeft = new Horse.WhiteHorse(7, 1);
+        horseWhiteRight = new Horse.WhiteHorse(7, 6);
+        bishopBlackLeft = new Bishop(0, 2);
+        bishopBlackRight = new Bishop(0, 5);
+        bishopWhiteLeft = new Bishop.WhiteBishop(7, 2);
+        bishopWhiteRight = new Bishop.WhiteBishop(7, 5);
+        rookBlackLeft = new Rook(0, 0);
+        rookBlackRight = new Rook(0, 7);
+        rookWhiteLeft = new Rook.WhiteRook(7, 0);
+        rookWhiteRight = new Rook.WhiteRook(7, 7);
+        pawnBlack1 = new Pawn(1, 0);
+        pawnBlack2 = new Pawn(1, 1);
+        pawnBlack3 = new Pawn(1, 2);
+        pawnBlack4 = new Pawn(1, 3);
+        pawnBlack5 = new Pawn(1, 4);
+        pawnBlack6 = new Pawn(1, 5);
+        pawnBlack7 = new Pawn(1, 6);
+        pawnBlack8 = new Pawn(1, 7);
+        pawnWhite1 = new Pawn.WhitePawn(6, 0);
+        pawnWhite2 = new Pawn.WhitePawn(6, 1);
+        pawnWhite3 = new Pawn.WhitePawn(6, 2);
+        pawnWhite4 = new Pawn.WhitePawn(6, 3);
+        pawnWhite5 = new Pawn.WhitePawn(6, 4);
+        pawnWhite6 = new Pawn.WhitePawn(6, 5);
+        pawnWhite7 = new Pawn.WhitePawn(6, 6);
+        pawnWhite8 = new Pawn.WhitePawn(6, 7);
+        queenBlack = new Queen(0, 3);
+        queenWhite = new Queen.WhiteQueen(7, 3);
+        kingBlack = new King(0, 4);
+        kingWhite = new King.WhiteKing(7, 4);
+        initialFiguresLayout.addAll(List.of(horseBlackLeft, horseBlackRight, horseWhiteLeft, horseWhiteRight, bishopBlackLeft, bishopBlackRight, bishopWhiteLeft, bishopWhiteRight, rookBlackLeft, rookBlackRight, rookWhiteLeft, rookWhiteRight, pawnBlack1, pawnBlack2, pawnBlack3, pawnBlack4, pawnBlack5, pawnBlack6, pawnBlack7, pawnBlack7, pawnBlack8, pawnWhite1, pawnWhite2, pawnWhite3, pawnWhite4, pawnWhite5, pawnWhite6, pawnWhite7, pawnWhite8, queenBlack, queenWhite, kingBlack, kingWhite));
     }
 }
 
 class Horse extends Figure {
-    public Horse(int x, int y, Figure figure) {
-        super(x, y, figure);
+    public Horse(int x, int y) {
+        super(x, y);
     }
 
     static class WhiteHorse extends Horse {
-        public WhiteHorse(int x, int y, Figure figure) {
-            super(x, y, figure);
+        public WhiteHorse(int x, int y) {
+            super(x, y);
         }
 
         protected static char figureChar = '\u265E';
@@ -276,7 +279,6 @@ class Horse extends Figure {
     }
 
     @Override
-        // not applicable
     boolean checkTransitClear(int x, int y, Figure figure) {
         return true;
     }
@@ -287,14 +289,13 @@ class Horse extends Figure {
      * therefore all functions hardcoded for usability. Thus utility methods receive data by means of
      * addition/substraction from current coordinates.
      *
-     * @param x      incremental/decremental value <b>x</b>
-     * @param y      incremental/decremental value <b>y</b>
-     * @param figure figure instance that moves
+     * @param x incremental/decremental value <b>x</b>
+     * @param y incremental/decremental value <b>y</b>     *
      */
     @Override
-    void move(int x, int y, Figure figure) {
-        assertFigureAlive(figure);
-        checkMoveOnSamePosition(getX(), getY(), x, y);
+    void move(int x, int y) {
+        assertFigureAlive(this);
+        checkMoveOnSamePosition(x, y);
         var figureCharr = this.isWhite() ? WhiteHorse.figureChar : figureChar;
         if (!checkBoundaries(x, y)) {
             out.println("move " + x + ":" + y + " leads outside the chessboard");
@@ -318,43 +319,43 @@ class Horse extends Figure {
     }
 
     void moveDownAndRight() {
-        move(2, 1, this);
+        move(2, 1);
     }
 
     void moveRightAndDown() {
-        move(1, 2, this);
+        move(1, 2);
     }
 
     void moveUpAndLeft() {
-        move(-2, -1, this);
+        move(-2, -1);
     }
 
     void moveUpAndRight() {
-        move(-2, 1, this);
+        move(-2, 1);
     }
 
     void moveDownAndLeft() {
-        move(2, -1, this);
+        move(2, -1);
     }
 
     void moveLeftAndUp() {
-        move(-1, -2, this);
+        move(-1, -2);
     }
 
     void moveLeftAndDown() {
-        move(1, -2, this);
+        move(1, -2);
     }
 
     void moveRightAndUp() {
-        move(-1, 2, this);
+        move(-1, 2);
     }
 }
 
 class Bishop extends Figure {
     static class WhiteBishop extends Bishop {
 
-        public WhiteBishop(int x, int y, Figure figure) {
-            super(x, y, figure);
+        public WhiteBishop(int x, int y) {
+            super(x, y);
         }
 
         protected static char figureChar = '\u265D';
@@ -371,23 +372,23 @@ class Bishop extends Figure {
         setFigureChar(figureChar);
     }
 
-    public Bishop(int x, int y, Figure figure) {
-        super(x, y, figure);
+    public Bishop(int x, int y) {
+        super(x, y);
     }
 
     @Override
     boolean checkTransitClear(int x, int y, Figure figure) {
         //go north east
-        if (getX() > x && getY() < y) {
-            for (int a = getX() - 1, b = getY() + 1; a > x && b < y; a--, b++) {
+        if (figure.getX() > x && figure.getY() < y) {
+            for (int a = getX() - 1, b = figure.getY() + 1; a > x && b < y; a--, b++) {
                 if (chessboard[a][b] != dot) {
                     calloutIfOccupied(a, b);
                 }
             }
         }
         //go north west
-        else if (getX() > x && getY() > y) {
-            for (int a = getX() - 1, b = getY() - 1; a > x && b > y; a--, b--) {
+        else if (figure.getX() > x && figure.getY() > y) {
+            for (int a = figure.getX() - 1, b = figure.getY() - 1; a > x && b > y; a--, b--) {
                 if (chessboard[a][b] != dot) {
                     calloutIfOccupied(a, b);
                 }
@@ -395,8 +396,8 @@ class Bishop extends Figure {
         }
 
         //go south east
-        else if (getX() < x && getY() < y) {
-            for (int a = getX() + 1, b = getY() + 1; a < x && b < y; a++, b++) {
+        else if (figure.getX() < x && figure.getY() < y) {
+            for (int a = getX() + 1, b = figure.getY() + 1; a < x && b < y; a++, b++) {
                 if (chessboard[a][b] != dot) {
                     calloutIfOccupied(a, b);
                 }
@@ -405,7 +406,7 @@ class Bishop extends Figure {
 
         //go south west
         else {
-            for (int a = getX() + 1, b = getY() - 1; a < x && b < y; a++, b--) {
+            for (int a = figure.getX() + 1, b = figure.getY() - 1; a < x && b < y; a++, b--) {
                 if (chessboard[a][b] != dot) {
                     calloutIfOccupied(a, b);
                 }
@@ -421,15 +422,16 @@ class Bishop extends Figure {
     }
 
     @Override
-    void move(int x, int y, Figure figure) {
-        assertFigureAlive(figure);
-        var figureCharr = figure.isWhite() ? Bishop.WhiteBishop.figureChar : figureChar;
-        if (!isMoveDiagonal(x, y, figure)) {
+    void move(int x, int y) {
+        assertFigureAlive(this);
+        tryMoveCallout(x, y);
+        var figureCharr = isWhite() ? Bishop.WhiteBishop.figureChar : figureChar;
+        if (!isMoveDiagonal(x, y)) {
             out.println(figureCharr + " moves in diagonal");
             printDelimiter();
         } else if (!checkBoundaries(x, y)) {
             out.println(figureCharr + " move " + x + ":" + y + " leads outside the chessboard");
-        } else if (!checkTransitClear(x, y, figure)) {
+        } else if (!checkTransitClear(x, y, this)) {
         } else if (targetSquareContainsFigure(x, y)) {
         } else {
             chessboard[getX()][getY()] = dot;
@@ -440,6 +442,7 @@ class Bishop extends Figure {
             viewBoard();
         }
     }
+
 
     @Override
     boolean checkBoundaries(int x, int y) {
@@ -452,38 +455,12 @@ class Bishop extends Figure {
             out.println(figureChar + " cur pos: (" + getX() + " : " + getY() + ")");
         }
     }
-
-    /*void moveUpAndLRight(int x, int y) {
-        move(x, y);
-    }
-
-    void moveDownAndLeft(int x, int y) {
-        move(x, y);
-    }
-
-    void moveUpAndLeft(int z) {
-        move(convertVectorCoordX(z),
-                convertVectorCoordY(z));
-    }
-
-    void moveDownRight(int z) {
-        move(convertVectorCoordX(z),
-                convertVectorCoordY(z));
-    }
-
-    int convertVectorCoordY(int z) {
-        return (chessboardSize - getY() + z - 1) % chessboardSize;
-    }
-
-    int convertVectorCoordX(int z) {
-        return (chessboardSize - getX() + z - 1) % chessboardSize;
-    }*/
 }
 
 class Rook extends Figure {
     static class WhiteRook extends Rook {
-        public WhiteRook(int x, int y, Figure figure) {
-            super(x, y, figure);
+        public WhiteRook(int x, int y) {
+            super(x, y);
         }
 
         protected static char figureChar = '\u265C';
@@ -500,8 +477,8 @@ class Rook extends Figure {
         setFigureChar(figureChar);
     }
 
-    public Rook(int x, int y, Figure figure) {
-        super(x, y, figure);
+    public Rook(int x, int y) {
+        super(x, y);
     }
 
     @Override
@@ -538,14 +515,15 @@ class Rook extends Figure {
     }
 
     @Override
-    void move(int x, int y, Figure figure) {
+    void move(int x, int y) {
+        checkMoveOnSamePosition(x, y);
         printDelimiter();
-        assertFigureAlive(figure);
+        assertFigureAlive(this);
         printDelimiter();
-        out.println("...Trying to move " + this.getFigureChar() + " (" + getX() + " : " + getY() + " -> " + x + " : " + y + ")");
+        tryMoveCallout(x, y);
         printDelimiter();
-        var figureCharr = figure.isWhite() ? Rook.WhiteRook.figureChar : figureChar;
-        if (!isMoveHorizontalOrVertical(x, y, figure)) {
+        var figureCharr = isWhite() ? Rook.WhiteRook.figureChar : figureChar;
+        if (!isMoveHorizontalOrVertical(x, y)) {
             out.println(figureCharr + " moves only vertically or horisontally, not in diagonal");
             printDelimiter();
             throw new UnsupportedOperationException();
@@ -553,7 +531,7 @@ class Rook extends Figure {
             out.println(figureCharr + " move " + x + ":" + y + " leads outside the chessboard");
             printDelimiter();
             throw new UnsupportedOperationException();
-        } else if (!checkTransitClear(x, y, figure)) {
+        } else if (!checkTransitClear(x, y, this)) {
             out.println("There's a figure in the way of " + figureCharr + " move at " + x + ":" + y);
             printDelimiter();
             throw new UnsupportedOperationException();
@@ -608,8 +586,8 @@ class Pawn extends Figure {
             return true;
         }
 
-        public WhitePawn(int x, int y, Figure figure) {
-            super(x, y, figure);
+        public WhitePawn(int x, int y) {
+            super(x, y);
         }
 
         protected static char figureChar = '\u265F';
@@ -617,7 +595,6 @@ class Pawn extends Figure {
         {
             setFigureChar(figureChar);
             setWhite(true);
-            //setFigure(this);
         }
     }
 
@@ -625,21 +602,11 @@ class Pawn extends Figure {
 
     {
         setFigureChar(figureChar);
-        //setFigure(this);
     }
 
-    public Pawn(int x, int y, Figure figure) {
-        super(x, y, figure);
+    public Pawn(int x, int y) {
+        super(x, y);
     }
-
-    /*static boolean checkPawnPosition(int y) {
-        for (int i = 0; i < chessboardSize; i++) {
-            if (chessboard[chessboardSize - 1][y] == figureChar) {
-                return true;
-            }
-        }
-        return false;
-    }*/
 
     @Override
     boolean checkTransitClear(int x, int y, Figure figure) {
@@ -668,11 +635,13 @@ class Pawn extends Figure {
     }
 
     @Override
-    void move(int targetX, int targetY, Figure figure) {
-        assertFigureAlive(figure);
-        var figureCharr = this.isWhite() ? WhitePawn.figureChar : figureChar;
-        checkMoveOnSamePosition(this.getX(), this.getY(), targetX, targetY);
-        if (isMoveDiagonal(targetX, targetY, figure) && Math.abs(getX() - targetX) == 1 && Math.abs(getY() - targetY) == 1 &&
+    void move(int targetX, int targetY) {
+        assertFigureAlive(this);
+        tryMoveCallout(targetX, targetY);
+        var figureCharr = isWhite() ? WhitePawn.figureChar : figureChar;
+        checkMoveOnSamePosition(targetX, targetY);
+        if (isMoveDiagonal(targetX, targetY) &&
+                Math.abs(getX() - targetX) == 1 && Math.abs(getY() - targetY) == 1 &&
                 targetSquareContainsFigure(targetX, targetY)) {
         } else if (getX() < targetX && this.isWhite() || getX() > targetX && !this.isWhite()) {
             out.println("seems like you're trying to move " + figureCharr + " backwards");
@@ -684,12 +653,12 @@ class Pawn extends Figure {
 
     void move(int movementStep) {
         assertFigureAlive(this);
+        tryMoveCallout(getX(), movementStep);
         var figureCharr = this.isWhite() ? WhitePawn.figureChar : figureChar;
         int newCoordinate = this.isWhite() ? getX() - movementStep : getX() + movementStep;
         if (!checkBoundaries(movementStep)) {
         } else if (!checkTransitClear(movementStep)) {
-            out.println("There's " + chessboard[newCoordinate][getY()] + " in the way of " +
-                    figureCharr + " move " + newCoordinate + ":" + getY());
+            out.println("There's " + chessboard[newCoordinate][getY()] + " in the way of " + figureCharr + " move " + newCoordinate + ":" + getY());
             printDelimiter();
         } else if (!checkMaxMovementStepFromStartingSquareOnly(movementStep)) {
             out.println(figureCharr + " is allowed to make extended move only from starting position");
@@ -725,14 +694,15 @@ class Pawn extends Figure {
     }
 
     void elevatePawnToNewQueen(int newCoordinate) { //todo implement logic for choosing any figure
-
         if (isFigureWhite(this)) {
-            queenNew = new Queen.WhiteQueen(0, 0, queenNew);
+            queenNew = new Queen.WhiteQueen(0, 0);
+            defeatedWhiteFigures.add(figureChar);
         } else {
-            queenNew = new Queen(0, 0, queenNew);
+            queenNew = new Queen(0, 0);
+            defeatedBlackFigures.add(figureChar);
         }
         chessboard[getX()][getY()] = dot;
-        registerMove(getX(), getY(), newCoordinate, getY(), this, "Queen");
+        registerMove(getX(), getY(), newCoordinate, getY(), this, this.getFigureChar() + " -> " + (isWhite() ? Queen.WhiteQueen.figureChar : Queen.figureChar));
         queenNew.setX(newCoordinate);
         queenNew.setY(getY());
         chessboard[queenNew.getX()][queenNew.getY()] = queenNew.getFigureChar();
@@ -741,7 +711,6 @@ class Pawn extends Figure {
         printDelimiter();
         out.println(figureChar + " has been promoted to " + queenNew.getFigureChar());
         printDelimiter();
-        defeatedFigures.add(figureChar);
         viewBoard();
     }
 }
@@ -749,8 +718,8 @@ class Pawn extends Figure {
 class Queen extends Figure {
     static class WhiteQueen extends Queen {
 
-        public WhiteQueen(int x, int y, Figure figure) {
-            super(x, y, figure);
+        public WhiteQueen(int x, int y) {
+            super(x, y);
         }
 
         protected static char figureChar = '\u265B';
@@ -767,16 +736,16 @@ class Queen extends Figure {
         setFigureChar(figureChar);
     }
 
-    public Queen(int x, int y, Figure figure) {
-        super(x, y, figure);
+    public Queen(int x, int y) {
+        super(x, y);
     }
 
     @Override
     boolean checkTransitClear(int x, int y, Figure figure) {
-        if (isMoveHorizontalOrVertical(x, y, figure)) { //horizontal
-            return rookBlackLeft.checkTransitClear(x, y, figure);
-        } else if (isMoveDiagonal(x, y, figure)) {
-            return bishopBlackLeft.checkTransitClear(x, y, figure);
+        if (isMoveHorizontalOrVertical(x, y)) { //horizontal
+            return rookBlackLeft.checkTransitClear(x, y, this);
+        } else if (isMoveDiagonal(x, y)) {
+            return rookBlackLeft.checkTransitClear(x, y, this);
         }
         return true;
     }
@@ -787,19 +756,22 @@ class Queen extends Figure {
     }
 
     @Override
-    void move(int x, int y, Figure figure) {
-        assertFigureAlive(figure);
-        var figureCharr = figure.isWhite() ? Queen.WhiteQueen.figureChar : figureChar;
-        if (!isMoveHorizontalOrVertical(x, y, figure) && !isMoveDiagonal(x, y, figure)) {
-            out.println(figureCharr + " moves in diagonal, vertical or horizontal");
+    void move(int x, int y) {
+        assertFigureAlive(this);
+        tryMoveCallout(x, y);
+        var figureCharr = isWhite() ? Queen.WhiteQueen.figureChar : figureChar;
+        if (!isMoveHorizontalOrVertical(x, y) && !isMoveDiagonal(x, y)) {
+            out.println(figureCharr + " moves in diagonal, vertical or horizontal, " +
+                    "move (" + getX() + " : " + getY() + ") -> (" + x + " : " + y + ") is invalid");
             printDelimiter();
             throw new IllegalStateException();
         } else if (!checkBoundaries(x, y)) {
             out.println(figureCharr + " move " + x + ":" + y + " leads outside the chessboard");
             printDelimiter();
-        } else if (!checkTransitClear(x, y, figure)) {
+        } else if (!checkTransitClear(x, y, this)) {
             out.println("There's a figure in the way of " + figureCharr + " move at " + x + ":" + y);
             printDelimiter();
+            throw new UnsupportedOperationException();
         } else if (targetSquareContainsFigure(x, y)) {
         } else {
             chessboard[getX()][getY()] = dot;
@@ -881,27 +853,18 @@ class King extends Figure {
 
     private boolean proveFreeSpaceToTheRook(Figure figure, boolean isCastlingShort) {
         if (figure.isWhite()) {
-            return isCastlingShort ? chessboard[figure.getX()][figure.getY() + 1] == dot
-                    && chessboard[figure.getX()][figure.getY() + 2] == dot
-                    : chessboard[figure.getX()][figure.getY() - 1] == dot
-                    && chessboard[figure.getX()][figure.getY() - 2] == dot
-                    && chessboard[figure.getX()][figure.getY() - 3] == dot;
-        } else return isCastlingShort ? chessboard[figure.getX()][figure.getY() + 1] == dot
-                && chessboard[figure.getX()][figure.getY() + 2] == dot
-                : chessboard[figure.getX()][figure.getY() - 1] == dot
-                && chessboard[figure.getX()][figure.getY() - 2] == dot
-                && chessboard[figure.getX()][figure.getY() - 3] == dot;
+            return isCastlingShort ? chessboard[figure.getX()][figure.getY() + 1] == dot && chessboard[figure.getX()][figure.getY() + 2] == dot : chessboard[figure.getX()][figure.getY() - 1] == dot && chessboard[figure.getX()][figure.getY() - 2] == dot && chessboard[figure.getX()][figure.getY() - 3] == dot;
+        } else
+            return isCastlingShort ? chessboard[figure.getX()][figure.getY() + 1] == dot && chessboard[figure.getX()][figure.getY() + 2] == dot : chessboard[figure.getX()][figure.getY() - 1] == dot && chessboard[figure.getX()][figure.getY() - 2] == dot && chessboard[figure.getX()][figure.getY() - 3] == dot;
     }
 
     private boolean proveFigureNeverMoved(Figure figure) {
-        return movesRegister.stream()
-                .filter(e -> e.getFigure() == figure)
-                .findFirst().isEmpty();
+        return movesRegister.stream().filter(e -> e.getFigure() == figure).findFirst().isEmpty();
     }
 
     static class WhiteKing extends King {
-        public WhiteKing(int x, int y, Figure figure) {
-            super(x, y, figure);
+        public WhiteKing(int x, int y) {
+            super(x, y);
         }
 
         protected static char figureChar = '\u265A';
@@ -918,8 +881,8 @@ class King extends Figure {
         setFigureChar(figureChar);
     }
 
-    protected King(int x, int y, Figure figure) {
-        super(x, y, figure);
+    protected King(int x, int y) {
+        super(x, y);
     }
 
     @Override
@@ -928,15 +891,23 @@ class King extends Figure {
     }
 
     @Override
-    void move(int x, int y, Figure figure) {
-        var figureCharr = figure.isWhite() ? King.WhiteKing.figureChar : figureChar;
-        checkMoveOnSamePosition(getX(), getY(), x, y);
-        detectCheckByFigure(x, y); //todo returns unnecessary black chars, concatenate
-        var checkFigure = retrieveFigureAtSquare(lastCheckFigureCoordX, lastCheckFigureCoordY);
-        if (checkFigure.isEmpty() && x < 3) { //limiting check for initial figures allocation in rows 1-2
-            checkFigure = fetchInitialLayoutData(x, y);
-        }
-        if (!checkBoundaries(x, y)) {
+    void move(int x, int y) {
+        var figureCharr = isWhite() ? King.WhiteKing.figureChar : figureChar;
+        checkMoveOnSamePosition(x, y);
+        tryMoveCallout(x, y);
+        //todo stalemate is also due when figures exist but unable to move
+        /*if (isStalemate(x, y) && isSquareChecked(x, y)) {
+            out.println("<<<<<<< Checkmate. Game over >>>>>>>>>" + (isWhite() ? "Blacks " : "Whites " + " have won"));
+            movesRegister.add(new MovesRegister(getX(), getY(), x, y, this, "M"));
+            printMovesRegisterLastEntry(movesRegister.get(movesRegister.size() - 1));
+            System.exit(0);
+        } else*/
+        if (/*!isSquareChecked(x, y) && */isStalemate(x, y)) {
+            out.println("<<<<<<< Stalemate. Draw >>>>>>>>>>>>>");
+            movesRegister.add(new MovesRegister(getX(), getY(), x, y, this, "S"));
+            printMovesRegisterLastEntry(movesRegister.get(movesRegister.size() - 1));
+            System.exit(0);
+        } else if (!checkBoundaries(x, y)) {
             out.println(figureCharr + " move " + x + " : " + y + " leads outside the chessboard");
             printDelimiter();
         } else if (Math.abs(x - getX()) > 1 || Math.abs(y - getY()) > 1) {
@@ -946,10 +917,32 @@ class King extends Figure {
         } else if (chessboard[x][y] != dot) {
             printDelimiter();
             targetSquareContainsFigure(x, y);
-        } else if (lastCheckFigureChar != dot && checkFigure.isPresent() && !checkIfFiguresColorsIdentical(checkFigure.orElseThrow(), this)) {
-            out.println("The square " + x + " : " + y + " is under the check of " + lastCheckFigureChar + " (" + lastCheckFigureCoordX + " : " + lastCheckFigureCoordY + "), unable to move");
-            printDelimiter();
-            throw new IllegalStateException();
+        } else if (isSquareChecked(x, y)) {
+            var checkFigure = retrieveFigureAtSquare(lastCheckFigureCoordX, lastCheckFigureCoordY);
+            if (checkFigure.isEmpty() && x < 3) { //limiting check for initial figures allocation in rows 1-2
+                checkFigure = fetchInitialLayoutData(x, y);
+            }
+            Figure figureChecking;
+            if (checkFigure.isPresent()) figureChecking = checkFigure.orElseThrow();
+            else throw new IllegalArgumentException();
+            if (attackingAndAttackedFiguresColorDiffer(figureChecking, this)) {
+                if (isSquareChecked(this.getX(), this.getY())) {
+                    out.println("<<< Checkmate. Game over >>>" + (isWhite() ? "\nBlacks " : " Whites " + "have won!!!"));
+                    movesRegister.add(new MovesRegister(getX(), getY(), x, y, this, "M"));
+                    printMovesRegisterLastEntry(movesRegister.get(movesRegister.size() - 1));
+                    System.exit(0);
+                } else {
+                    out.println("The square " + x + " : " + y + " is under the check of "
+                            + figureChecking.getFigureChar() + " ("
+                            + figureChecking.getX() + " : "
+                            + figureChecking.getY() + "), unable to move");
+                    lastCheckFigureCoordX = figureChecking.getX();
+                    lastCheckFigureCoordY = figureChecking.getY();
+                    printDelimiter();
+                    throw new UnsupportedOperationException();
+                }
+            }
+
         } else {
             chessboard[x][y] = figureCharr;
             chessboard[getX()][getY()] = dot;
@@ -960,18 +953,86 @@ class King extends Figure {
         }
     }
 
-    private char detectCheckByFigure(int x, int y) {
-        if (checkHorses(x, y)) return Horse.figureChar;
-        else if (!checkAxials(x, y, this, "R")) return Rook.figureChar;
-        else if (!checkQueens(x, y)) return Queen.figureChar;
-        else if (checkPawns(x, y)) return Pawn.figureChar;
-        else if (!checkDiagonals(x, y, this, "B")) return Bishop.figureChar;
-        else if (checkKingBlacks(x, y)) return figureChar;
-        else return dot;
+    private boolean noOtherFiguresLeft() {
+        if (isWhite() && defeatedWhiteFigures.size() == 15) return true;
+        else return defeatedBlackFigures.size() == 15;
     }
 
-    private boolean checkHorses(int x, int y) {
-        char charr = Horse.figureChar;
+    private static void printMovesRegisterLastEntry(MovesRegister last) {
+        out.println(
+                last.getFigure().getFigureChar()
+                        + " (" + last.getStartX() + " : "
+                        + last.getStartY() + ") -> (" +
+                        last.getTargetX() + " : " +
+                        last.getTargetY() + ") "
+                        + last.getMoveSpecialty());
+    }
+
+    public boolean isStalemate(int x, int y) {
+        if (!noOtherFiguresLeft()) return false;
+        else if (x - 1 < 0 && y - 1 < 0) {
+            //King's on the upleft corner, checking: down, right, downright
+            return isSquareChecked(x, y + 1) && //right
+                    isSquareChecked(x + 1, y + 1) && //downright
+                    isSquareChecked(x + 1, y); // down
+        } else if (x - 1 < 0 && y + 1 >= chessboardSize) {
+            //King's on the upright corner, checking: down, left, downleft
+            return isSquareChecked(x + 1, y) && // down
+                    isSquareChecked(x + 1, y - 1) && //downleft
+                    isSquareChecked(x, y - 1); //left
+        } else if (x + 1 >= chessboardSize && y - 1 < 0) {
+            //King's on the downleft corner, checking: up, right, upright
+            return isSquareChecked(x, y + 1) && //right
+                    isSquareChecked(x - 1, y) && // up
+                    isSquareChecked(x - 1, y + 1); //upright
+        } else if (x + 1 >= chessboardSize && y + 1 >= chessboardSize) {
+            //King's on the downright corner, checking: up, left, upleft
+            return isSquareChecked(x, y - 1) && //left
+                    isSquareChecked(x - 1, y) && // up
+                    isSquareChecked(x - 1, y - 1);  //upleft
+        } else if (x - 1 < 0) {
+            //King's on the 1st row, not checking: up, upright, upleft
+            return isSquareChecked(x, y + 1) && //right
+                    isSquareChecked(x + 1, y + 1) && //downright
+                    isSquareChecked(x + 1, y) && // down
+                    isSquareChecked(x + 1, y - 1) && //downleft
+                    isSquareChecked(x, y - 1); //left
+        } else if (y - 1 < 0) {
+            //King's on the 1st column, not checking: left, downleft, upleft
+            return isSquareChecked(x - 1, y) && // up
+                    isSquareChecked(x - 1, y + 1) && //upright
+                    isSquareChecked(x, y + 1) && //right
+                    isSquareChecked(x + 1, y + 1) && //downright
+                    isSquareChecked(x + 1, y); // down
+        } else if (y + 1 >= chessboardSize) {
+            //King's on the last column, not checking: right, downright, upright
+            return isSquareChecked(x - 1, y) && // up
+                    isSquareChecked(x - 1, y - 1) &&  //upleft
+                    isSquareChecked(x + 1, y) && // down
+                    isSquareChecked(x, y - 1); //left
+        } else if (x + 1 >= chessboardSize) {
+            //King's on the last row, not checking: downleft, downright, down
+            return isSquareChecked(x - 1, y) && // up
+                    isSquareChecked(x - 1, y - 1) &&  //upleft
+                    isSquareChecked(x, y - 1) && //left
+                    isSquareChecked(x, y + 1); //right
+        }
+        return false;
+    }
+
+    public boolean isSquareChecked(int x, int y) {
+        /*if (chessboard[x][y] != dot) return false;
+        else */
+        if (checkHorses(x, y, this)) return true;
+        else if (checkAxials(x, y, this, "R")) return true;
+        else if (checkQueens(x, y)) return true;
+        else if (checkPawns(x, y, this)) return true;
+        else if (checkDiagonals(x, y, this, "B")) return true;
+        else return checkKings(x, y, this);
+    }
+
+    private boolean checkHorses(int x, int y, King king) {
+        char charr = king.isWhite() ? Horse.figureChar : Horse.WhiteHorse.figureChar;
         if (x + 1 < chessboardSize && y - 2 > -1 && chessboard[x + 1][y - 2] == charr) { // Nord Nord East
             return true;
         } else if (x - 2 > -1 && y - 1 > -1 && chessboard[x - 2][y - 1] == charr) { //Nord Nord West
@@ -990,122 +1051,150 @@ class King extends Figure {
             return x + 2 < chessboardSize && y + 1 < chessboardSize && chessboard[x + 2][y + 1] == charr; // South South East
     }
 
-    private boolean checkKingBlacks(int x, int y) {
-        return x - 1 < chessboardSize && y + 1 < chessboardSize && chessboard[x - 1][y + 1] == WhiteKing.figureChar &&
-                x < chessboardSize && chessboard[x][y + 1] == WhiteKing.figureChar &&
-                x + 1 < chessboardSize && chessboard[x + 1][y + 1] == WhiteKing.figureChar;
+    private boolean checkKings(int x, int y, King king) {
+        char charr = king.isWhite() ? King.figureChar : King.WhiteKing.figureChar;
+        if (y + 1 < chessboardSize && chessboard[x][y + 1] == charr) return true; //e
+        else if (y - 1 > -1 && chessboard[x][y - 1] == charr) return true; //w
+        else if (x + 1 < chessboardSize && chessboard[x + 1][y] == charr) return true; //s
+        else if (x - 1 > -1 && chessboard[x - 1][y] == charr) return true; //n
+        else if (x + 1 < chessboardSize && y + 1 < chessboardSize && chessboard[x + 1][y + 1] == charr)
+            return true; //se
+        else if (x - 1 > -1 && y + 1 < chessboardSize && chessboard[x - 1][y + 1] == charr) return true; //ne
+        else if (x - 1 > -1 && y - 1 > -1 && chessboard[x - 1][y - 1] == charr) return true; //nw
+        else if (x + 1 < chessboardSize && y - 1 > -1 && chessboard[x + 1][y - 1] == charr) return true; //sw
+        else return false;
     }
 
 
-    private boolean checkPawns(int x, int y) {
-        if (x + 1 < chessboardSize && y - 1 > -1 && chessboard[x + 1][y - 1] == Pawn.figureChar) { //check NE
+    private boolean checkPawns(int x, int y, King king) {
+        char charr = king.isWhite() ? Pawn.figureChar : Pawn.WhitePawn.figureChar;
+        if (king.isWhite()) {
+            if (x - 1 > -1 && y + 1 < chessboardSize &&
+                    chessboard[x - 1][y + 1] == charr) {  //check NE
+                return true;
+            } else return x - 1 > -1 && y - 1 > -1 &&
+                    chessboard[x - 1][y - 1] == charr; //check NW
+        } else if (x + 1 < chessboardSize &&
+                y + 1 < chessboardSize &&
+                chessboard[x + 1][y + 1] == charr) {//check SE
             return true;
-        } else if (x - 1 > -1 && y - 1 > -1 && chessboard[x - 1][y - 1] == Pawn.figureChar) { //check NW
-            return true;
-        } else if (x + 1 < chessboardSize && y + 1 < chessboardSize && chessboard[x + 1][y + 1] == Pawn.figureChar) {//check SE
-            return true;
-        } else return x - 1 > -1 && y + 1 < chessboardSize && chessboard[x - 1][y + 1] == Pawn.figureChar; //check SW
+        } else return x + 1 < chessboardSize && y - 1 > -1 &&
+                chessboard[x + 1][y - 1] == charr; //check SW
     }
 
     private boolean checkQueens(int x, int y) {
-        return checkAxials(x, y, this, "Q") && checkDiagonals(x, y, this, "Q");
+        return checkAxials(x, y, this, "Q") || checkDiagonals(x, y, this, "Q");
     }
 
     private boolean checkDiagonals(int x, int y, King king, String figure) {
         boolean isKingWhite = king.isWhite();
         char retrievedFigureChar;
-
         switch (figure) {
             case ("B") -> retrievedFigureChar = isKingWhite ? Bishop.figureChar : Bishop.WhiteBishop.figureChar;
             case ("Q") -> retrievedFigureChar = isKingWhite ? Queen.figureChar : Queen.WhiteQueen.figureChar;
             default -> throw new UnsupportedOperationException();
         }
-
         //check North East
         for (int i = x, j = y; i > -1 && j < chessboardSize; i--, j++) {
             if (chessboard[i][j] == retrievedFigureChar) {
+                lastCheckFigureCoordX = i;
+                lastCheckFigureCoordY = j;
+                lastCheckFigureChar = chessboard[i][j];
+                return true;
+            } else if (chessboard[i][j] != dot) {
                 return false;
             }
+
         }//check South East
         for (int i = x, j = y; i < chessboardSize && j < chessboardSize; i++, j++) {
             if (chessboard[i][j] == retrievedFigureChar) {
+                lastCheckFigureCoordX = i;
+                lastCheckFigureCoordY = j;
+                lastCheckFigureChar = chessboard[i][j];
+                return true;
+            } else if (chessboard[i][j] != dot) {
                 return false;
             }
         }
         //check North West
         for (int i = x, j = y; i > -1 && j > -1; i--, j--) { //todo test it
             if (chessboard[i][j] == retrievedFigureChar) {
+                lastCheckFigureCoordX = i;
+                lastCheckFigureCoordY = j;
+                lastCheckFigureChar = chessboard[i][j];
+                return true;
+            } else if (chessboard[i][j] != dot) {
                 return false;
             }
         }
         //check South West
         for (int i = x, j = y; i < chessboardSize && j > -1; i++, j--) { //todo test it
             if (chessboard[i][j] == retrievedFigureChar) {
+                lastCheckFigureCoordX = i;
+                lastCheckFigureCoordY = j;
+                lastCheckFigureChar = chessboard[i][j];
+                return true;
+            } else if (chessboard[i][j] != dot) {
                 return false;
             }
+
         }
-        return true;
+        return false;
     }
 
     private boolean checkAxials(int x, int y, King king, String figure) {
         boolean isKingWhite = king.isWhite();
         char retrievedFigureChar;
         switch (figure) {
-            case ("R") -> retrievedFigureChar = isKingWhite ? Bishop.figureChar : Bishop.WhiteBishop.figureChar;
+            case ("R") -> retrievedFigureChar = isKingWhite ? Rook.figureChar : Rook.WhiteRook.figureChar;
             case ("Q") -> retrievedFigureChar = isKingWhite ? Queen.figureChar : Queen.WhiteQueen.figureChar;
             default -> throw new UnsupportedOperationException();
         }
         //check horizontal to the right
-        for (int i = getY(); i < chessboardSize; i++) {
+        for (int i = king.getY(); i < chessboardSize; i++) {
             if (chessboard[x][i] == retrievedFigureChar) {
-                lastCheckFigureCoordX = x; //todo provide all checkChecks with these statics setting
-                lastCheckFigureCoordY = i;
-                lastCheckFigureChar = chessboard[x][i];
-                return false;
-            } else if (chessboard[x][i] != dot) {
-                return true;
-            }
-        }
-        //check horizontal to the left
-        for (
-                int i = getY();
-                i > -1; i--) {
-            if (chessboard[x][i] != dot) {
-                return true;
-            } else if (chessboard[x][i] == retrievedFigureChar) {
                 lastCheckFigureCoordX = x;
                 lastCheckFigureCoordY = i;
                 lastCheckFigureChar = chessboard[x][i];
+                return true;
+            } else if (chessboard[x][i] != this.getFigureChar() && chessboard[x][i] != dot) {
+                return false;
+            }
+        }
+        //check horizontal to the left
+        for (int i = king.getY(); i > -1; i--) {
+            if (chessboard[x][i] == retrievedFigureChar) {
+                lastCheckFigureCoordX = x;
+                lastCheckFigureCoordY = i;
+                lastCheckFigureChar = chessboard[x][i];
+                return true;
+            } else if (chessboard[x][i] != dot) {
                 return false;
             }
         }
         //check vertical down
-        for (
-                int i = getX();
-                i < chessboardSize; i++) {
-            if (chessboard[i][y] != dot) {
-                return true;
-            } else if (chessboard[i][y] == retrievedFigureChar) {
+        for (int i = king.getX(); i < chessboardSize; i++) {
+            if (chessboard[i][y] == retrievedFigureChar) {
                 lastCheckFigureCoordX = i;
                 lastCheckFigureCoordY = y;
                 lastCheckFigureChar = chessboard[i][y];
+                return true;
+            } else if (chessboard[i][y] != dot) {
                 return false;
             }
         }
         //check vertical up
-        for (
-                int i = getX();
-                i > -1; i--) {
-            if (chessboard[i][y] != dot) {
-                return true;
-            } else if (chessboard[i][y] == retrievedFigureChar) {
+        for (int i = king.getX(); i > -1; i--) {
+            if (chessboard[i][y] == retrievedFigureChar) {
                 lastCheckFigureCoordX = i;
                 lastCheckFigureCoordY = y;
                 lastCheckFigureChar = chessboard[i][y];
+                return true;
+            } else if (chessboard[i][y] != dot) {
                 return false;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -1119,12 +1208,6 @@ class King extends Figure {
             out.println(figureChar + " cur pos: (" + getX() + " : " + getY() + ")");
         }
     }
-
-    void printCurrentPositionKingWhite() {
-        if (kingBlack.getX() != defeatedIndex) {
-            out.println(WhiteKing.figureChar + " cur pos: (" + kingBlack.getX() + " : " + kingBlack.getY() + ")");
-        }
-    }
 }
 
 abstract class Figure {
@@ -1132,20 +1215,9 @@ abstract class Figure {
     private boolean isWhite;
     private char figureChar;
 
-    /*public Figure getFigure() {
-        return figure;
-    }
-
-    public void setFigure(Figure figure) {
-        this.figure = figure;
-    }
-
-    private Figure figure;*/
-
-    public Figure(int x, int y, Figure figure) {
+    public Figure(int x, int y) {
         this.x = x;
         this.y = y;
-        //this.figure = figure;
     }
 
     public boolean isWhite() {
@@ -1180,12 +1252,18 @@ abstract class Figure {
         this.y = y;
     }
 
+    void tryMoveCallout(int x, int y) {
+        printDelimiter();
+        out.println("...Trying to move " + getFigureChar() + " (" + getX() + " : " + getY() + " -> " + x + " : " + y + ")");
+        printDelimiter();
+    }
+
     static boolean isFigureWhite(Figure figure) {
         return figure.getClass().getName().contains("White");
     }
 
-    static void checkMoveOnSamePosition(int startX, int startY, int targetX, int targetY) {
-        if (startX == targetX && startY == targetY) {
+    void checkMoveOnSamePosition(int targetX, int targetY) {
+        if (getX() == targetX && getY() == targetY) {
             printDelimiter();
             out.println("Trying to move on the same position");
             printDelimiter();
@@ -1200,15 +1278,12 @@ abstract class Figure {
      * @return true if move stays inside, false - trespasses board's measures
      */
     boolean checkBoundaries(int x, int y) {
-        return getX() + x < chessboardSize &&
-                getX() + x > -1 &&
-                getY() + y < chessboardSize &&
-                getY() + y > -1;
+        return getX() + x < chessboardSize && getX() + x > -1 && getY() + y < chessboardSize && getY() + y > -1;
     }
 
     abstract boolean checkTransitClear(int x, int y, Figure figure);
 
-    abstract void move(int x, int y, Figure figure);
+    abstract void move(int x, int y);
 
     abstract void printCurrentPosition();
 
@@ -1216,15 +1291,13 @@ abstract class Figure {
     static void registerMove(int startX, int startY, int targetX, int targetY, Figure figure) {
         movesRegister.add(new MovesRegister(startX, startY, targetX, targetY, figure, ""));
         printDelimiter();
-        out.println(++innerListMovesCounter + ". Moving " + figure.getFigureChar() + " ("
-                + figure.getX() + " : " + figure.getY() + ") -> (" + targetX + " : " + targetY + ")");
+        out.println(++innerListMovesCounter + ". Moving " + figure.getFigureChar() + " (" + figure.getX() + " : " + figure.getY() + ") -> (" + targetX + " : " + targetY + ")");
     }
 
     static void registerMove(int startX, int startY, int targetX, int targetY, Figure figure, String moveSpecialty) {
         movesRegister.add(new MovesRegister(startX, startY, targetX, targetY, figure, moveSpecialty));
         printDelimiter();
-        out.println(++innerListMovesCounter + ". Moving " + figure.getFigureChar() + " ("
-                + figure.getX() + " : " + figure.getY() + ") -> (" + targetX + " : " + targetY + ") " + moveSpecialty);
+        out.println(++innerListMovesCounter + ". Moving " + figure.getFigureChar() + " (" + figure.getX() + " : " + figure.getY() + ") -> (" + targetX + " : " + targetY + ") " + moveSpecialty);
     }
 
     void assertFigureAlive(Figure figure) {
@@ -1256,11 +1329,15 @@ abstract class Figure {
             out.println("You cannot kill King, only check (-mate) is allowed");
             printDelimiter();
             throw new UnsupportedOperationException("King Kill Attempt");
-        } else if (!checkIfFiguresColorsIdentical(attackedFigure.orElseThrow(), this)) {
+        } else if (attackingAndAttackedFiguresColorDiffer(attackedFigure.orElseThrow(), this)) {
             printDelimiter();
             out.println(getFigureChar() + " kills " + attackedSquare + " at pos (" + targetX + " : " + targetY + ")");
             printDelimiter();
-            defeatedFigures.add(attackedSquare);
+            if (attackedFigure.orElseThrow().isWhite()) {
+                defeatedWhiteFigures.add(attackedSquare);
+            } else {
+                defeatedBlackFigures.add(attackedSquare);
+            }
             attackedFigure.orElseThrow().setX(-1);
             attackedFigure.orElseThrow().setY(-1);
             chessboard[targetX][targetY] = getFigureChar();
@@ -1269,41 +1346,36 @@ abstract class Figure {
             setX(targetX);
             setY(targetY);
             viewBoard();
+            return true;
         }
         return true;
     }
 
     Optional<Figure> fetchInitialLayoutData(int x, int y) {
-        return initialFiguresLayout.stream()
-                .filter(e -> e.getX() == x && e.getY() == y)
-                .findFirst();
+        return initialFiguresLayout.stream().filter(e -> e.getX() == x && e.getY() == y).findFirst();
     }
 
-    static boolean checkIfFiguresColorsIdentical(Figure attackedFigure, Figure attackingFigure) {
+    static boolean attackingAndAttackedFiguresColorDiffer(Figure attackedFigure, Figure attackingFigure) {
         if (attackedFigure == null) {
             out.println("attacked figure is null");
-            return false;
-        } else if (isFigureWhite(attackedFigure) && isFigureWhite(attackingFigure)
-                || !isFigureWhite(attackedFigure) && !isFigureWhite(attackingFigure)) {
-            out.println("Unable to attack figure of the same color");
             return true;
+        } else if (isFigureWhite(attackedFigure) && isFigureWhite(attackingFigure) || !isFigureWhite(attackedFigure) && !isFigureWhite(attackingFigure)) {
+            out.println("Unable to attack figure of the same color");
+            return false;
         }
-        return false;
+        return true;
     }
 
     static Optional<Figure> retrieveFigureAtSquare(int x, int y) {
-        return movesRegister.stream()
-                .filter(e -> e.getTargetX() == x && e.getTargetY() == y)
-                .max(Comparator.comparing(e -> e.getOrderNum()))
-                .map(e -> e.getFigure());
+        return movesRegister.stream().filter(e -> e.getTargetX() == x && e.getTargetY() == y).max(Comparator.comparing(e -> e.getOrderNum())).map(e -> e.getFigure());
     }
 
-    boolean isMoveHorizontalOrVertical(int x, int y, Figure figure) {
-        return figure.getX() == x && figure.getY() != y || figure.getX() != x && figure.getY() == y;
+    boolean isMoveHorizontalOrVertical(int x, int y) {
+        return getX() == x && getY() != y || getX() != x && getY() == y;
     }
 
-    boolean isMoveDiagonal(int x, int y, Figure figure) {
-        return Math.abs(x - figure.getX()) == Math.abs(y - figure.getY());
+    boolean isMoveDiagonal(int x, int y) {
+        return Math.abs(x - getX()) == Math.abs(y - getY());
     }
 }
 
