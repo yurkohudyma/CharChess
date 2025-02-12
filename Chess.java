@@ -31,8 +31,18 @@ public class Chess {
 
     public static void main(String[] args) {
         initialFill();
-        out.println("Is stalemate at cur pos : " + kingBlack.isStalemate(false));
+        //out.println("Is stalemate at cur pos : " + kingBlack.isStalemate(false));
+        //out.println(kingBlack.areFiguresLeft(true ));
+        /*initialFiguresLayout.stream()
+                .filter(Figure::isWhite)
+                .filter(f -> f != kingWhite)
+                .forEach(f -> out.println(f.getClass().getSimpleName()));
+*/
 
+        //out.println(kingBlack.isSquareChecked(0,0));
+        //kingBlack.move(2,1);
+        //out.println(kingBlack.isStalemate());
+        out.println(kingBlack.isStalemate());
     }
 
     static void printDelimiter() {
@@ -41,7 +51,6 @@ public class Chess {
 
     static void viewBoard() {
         printBoard();
-        //printFiguresPositions();
         printDelimiter();
         printMovesRegister();
         out.println();
@@ -65,22 +74,8 @@ public class Chess {
         }
         if (movesRegister.size() >= 20) {
             printBoard();
-            //printFiguresPositions();
         }
     }
-
-    /*private static void printFiguresPositions() {
-        if (horse != null) horse.printCurrentPosition();
-        if (rook != null) rook.printCurrentPosition();
-        if (bishop != null) bishop.printCurrentPosition();
-        if (pawn != null) pawn.printCurrentPosition();
-        if (queen != null) queen.printCurrentPosition();
-        if (kingBlack != null) kingBlack.printCurrentPosition();
-        if (kingWhite != null) kingWhite.printCurrentPositionKingWhite();
-        if (!defeatedFigures.isEmpty()) {
-            out.println("Defeated: " + defeatedFigures);
-        }
-    }*/
 
     private static void printBoard() {
         printDelimiter();
@@ -115,7 +110,8 @@ public class Chess {
 
     private static void initialFill() {
         //initStartChessboardLayout();
-        initStalemateLayout();
+        //initStalemateLayout();
+        initCheckmateLayout();
         for (char[] chars : chessboard) {
             Arrays.fill(chars, dot);
         }
@@ -171,7 +167,15 @@ public class Chess {
         kingWhite = new King.WhiteKing(6, 6);
         rookWhiteLeft = new Rook.WhiteRook(5, 1);
         pawnBlack4 = new Pawn(1, 3);
-        initialFiguresLayout.addAll(List.of(queenWhite, kingBlack, kingWhite, rookWhiteLeft, pawnBlack4));
+        initialFiguresLayout.addAll(List.of(queenWhite, kingBlack, kingWhite, rookWhiteLeft/*, pawnBlack4*/));
+    }
+
+    private static void initCheckmateLayout() {
+        queenWhite = new Queen.WhiteQueen(0, 2);
+        kingBlack = new King(0, 0);
+        kingWhite = new King.WhiteKing(7, 7);
+        rookWhiteLeft = new Rook.WhiteRook(5, 0);
+        initialFiguresLayout.addAll(List.of(queenWhite, kingBlack, kingWhite, rookWhiteLeft));
     }
 }
 
@@ -817,13 +821,14 @@ class King extends Figure {
         checkMoveOnSamePosition(x, y);
         tryMoveCallout(x, y);
         //todo stalemate is also due when figures exist but unable to move
+        //checkLeftoverFigures (false);
         /*if (isStalemate(x, y) && isSquareChecked(x, y)) {
             out.println("<<<<<<< Checkmate. Game over >>>>>>>>>" + (isWhite() ? "Blacks " : "Whites " + " have won"));
             movesRegister.add(new MovesRegister(getX(), getY(), x, y, this, "M"));
             printMovesRegisterLastEntry(movesRegister.get(movesRegister.size() - 1));
             System.exit(0);
         } else*/
-        if (/*!isSquareChecked(x, y) && */isStalemate(false)) {
+        if (/*!isSquareChecked(x, y) && */isStalemate()) {
             out.println("<<<<<<< Stalemate. Draw >>>>>>>>>>>>>");
             movesRegister.add(new MovesRegister(getX(), getY(), x, y, this, "S"));
             printMovesRegisterLastEntry(movesRegister.get(movesRegister.size() - 1));
@@ -874,6 +879,8 @@ class King extends Figure {
         }
     }
 
+
+
     private boolean noOtherFiguresLeft() {
         if (isWhite() && defeatedWhiteFigures.size() == 15) return true;
         else return defeatedBlackFigures.size() == 15;
@@ -889,9 +896,13 @@ class King extends Figure {
                         + last.getMoveSpecialty());
     }
 
-    public boolean isStalemate(boolean testMode) {
+    public boolean isCheckmate (){
+        return isStalemate() && isSquareChecked(this.getX(), this.getY());
+    }
+
+    public boolean isStalemate() {
         int x = this.getX(), y = this.getY();
-        if (!testMode && !noOtherFiguresLeft()) { //testMode does not include king's color figures left
+        if (areFiguresLeft() /*!noOtherFiguresLeft()*/) { //testMode does not include king's color figures left
                                                   // (currently the moving possibility of those figures are not checked
                                                   // other figures leftover is checking by counting figures in defeated stack
                                                   // which is empty in custom chessboard layout case
@@ -1193,7 +1204,12 @@ abstract class Figure {
     }
 
     static boolean isFigureWhite(Figure figure) {
-        return figure.getClass().getName().contains("White");
+        return figure.getClass().getSimpleName().startsWith("White");
+    }
+
+    boolean areFiguresLeft() {
+        return this.isWhite ? initialFiguresLayout.stream().anyMatch(f -> f.isWhite() && f != kingWhite) :
+                initialFiguresLayout.stream().anyMatch(f -> !f.isWhite() && f != kingBlack);
     }
 
     void checkMoveOnSamePosition(int targetX, int targetY) {
